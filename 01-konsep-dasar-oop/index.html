@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //membuat object dengan object literal
+    const person = {
+      nama: "Tri",
+      umur: 25,
+      perkenalan: function(){
+        console.log(`Nama saya adalah ${this.nama}`);
+      }
+    };
+    console.log(person.nama);
+    person.perkenalan();
+
+    const car ={
+      brand: "Toyota",
+      model: "sedan",
+      year: "2025",
+      displayInfo: function(){
+        console.log(`mobil merek ${this.brand}, dengan model ${this.model}, buatan tahun ${this.year}`);
+      }
+    };
+    console.log(car.brand);
+    car.displayInfo();
+
+    //constructor function, memungkinkan membuat object dengan properti yang sama
+    //contoh 1
+    function Car(brand, model, year){
+      this.brand = brand;
+      this.model = model;
+      this.year = year;
+
+      this.displayInfo = function(){
+        console.log(`this is a ${this.year} ${this.brand} ${this.model}.`);
+      };
+    }
+
+    const car1 = new Car("Toyota", "Corolla", 2022);
+    const car2 = new Car("Honda", "Civic", 2023);
+    const car3 = new Car("Honda", "HRV", 2024);
+
+    car1.displayInfo();
+    car2.displayInfo();
+    car3.displayInfo();
+
+    function Animal(name, species, sound){
+      this.name = name;
+      this.species = species;
+      this.sound = sound;
+      Animal.prototype.makeSound = function(){
+        console.log(`suara ${this.name}, yang merupakan jenis ${this.species} seperti ini ${this.sound}`);
+      };
+    }
+
+    const binatang = new Animal("Anjing", "Herbivora", "guk guk guk");
+
+    binatang.makeSound();
+
+    //pewarisan dalam javascript (inheritance)
+
+
+  </script>
+</body>
+</html>

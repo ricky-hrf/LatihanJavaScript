@@ -1,0 +1,108 @@
+:root {
+  --bg-color: #f5f5f5;
+  --calculator-bg: #2d2d2d;
+  --display-bg: #1a1a1a;
+  --btn-bg: #3b3b3b;
+  --btn-hover: #4d4d4d;
+  --operation-btn: #ff9500;
+  --operation-hover: #ffaa33;
+  --clear-btn: #ff3b30;
+  --clear-hover: #ff5e52;
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --text-secondary: #a5a5a5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calculator {
+  background-color: var(--calculator-bg);
+  border-radius: 20px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+.display {
+  grid-column: span 4;
+  background-color: var(--display-bg);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: right;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.previous-operand {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  height: 1.2rem;
+  overflow: hidden;
+}
+
+.current-operand {
+  color: var(--text-light);
+  font-size: 2rem;
+  font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  height: 60px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-light);
+  background-color: var(--btn-bg);
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+}
+
+button[data-action="operation"] {
+  background-color: var(--operation-btn);
+  font-size: 1.4rem;
+}
+
+button[data-action="operation"]:hover {
+  background-color: var(--operation-hover);
+}
+
+button[data-action="clear"] {
+  background-color: var(--clear-btn);
+}
+
+button[data-action="clear"]:hover {
+  background-color: var(--clear-hover);
+}
+
+button[data-action="delete"] {
+  font-weight: 500;
+}
+
+.span-two {
+  grid-column: span 2;
+}

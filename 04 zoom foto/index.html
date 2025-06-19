@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Foto dengan JavaScript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .thumbnail {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 3px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .modal-img {
+      max-width: 100%;
+      max-height: 80vh;
+      display: block;
+      margin: 0 auto;
+      border: 5px solid white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 0, 0, 0.8);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .instructions {
+      margin-top: 20px;
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Zoom Foto dengan JavaScript</h1>
+    <img src="Instagram.jpg" alt="Foto Contoh" class="thumbnail" id="thumbnail">
+    <p class="instructions">Klik gambar untuk memperbesar</p>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeBtn">&times;</span>
+      <img src="Instagram.jpg" alt="Foto Besar" class="modal-img" id="modalImg">
+    </div>
+  </div>
+
+  <script>
+    // Ambil elemen-elemen yang diperlukan
+    const thumbnail = document.getElementById('thumbnail');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Ketika thumbnail diklik, tampilkan modal dengan gambar besar
+    thumbnail.addEventListener('click', function () {
+      modal.style.display = 'flex';
+      modalImg.src = this.src;
+    });
+
+    // Ketika tombol close diklik, sembunyikan modal
+    closeBtn.addEventListener('click', function () {
+      modal.style.display = 'none';
+    });
+
+    // Ketika mengklik di luar gambar, sembunyikan modal
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Tutup modal dengan tombol ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+
+</html>

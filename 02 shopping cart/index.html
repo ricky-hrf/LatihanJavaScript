@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page with Add to Cart</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+    }
+
+    /* Navbar Styles */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #e63946;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    /* Product Page Styles */
+    .product-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 40px;
+    }
+
+    .product-image {
+      flex: 1;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .product-details {
+      flex: 1;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-title {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .product-price {
+      font-size: 24px;
+      font-weight: bold;
+      color: #e63946;
+      margin-bottom: 20px;
+    }
+
+    .product-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .add-to-cart {
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+      background-color: #21867a;
+    }
+
+    .add-to-cart.added {
+      background-color: #4caf50;
+    }
+
+    .add-to-cart i {
+      font-size: 18px;
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #4caf50;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateX(200%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">MyShop</div>
+    <div class="nav-links">
+      <div class="cart-icon">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product Page -->
+  <div class="product-container">
+    <div class="product-image">
+      <img src="https://via.placeholder.com/500" alt="Product Image">
+    </div>
+    <div class="product-details">
+      <h1 class="product-title">Premium Wireless Headphones</h1>
+      <div class="product-price">$199.99</div>
+      <p class="product-description">
+        Experience crystal-clear sound with our premium wireless headphones.
+        Featuring active noise cancellation, 30-hour battery life, and
+        comfortable over-ear design for extended listening sessions.
+      </p>
+      <button class="add-to-cart" id="addToCartBtn">
+        <i class="fas fa-cart-plus"></i>
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    Item added to cart successfully!
+  </div>
+
+  <script>
+    // DOM Elements
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const cartCount = document.getElementById('cartCount');
+    const notification = document.getElementById('notification');
+
+    // Cart State
+    let cartItems = 0;
+    let isAdded = false;
+
+    // Add to Cart Functionality
+    addToCartBtn.addEventListener('click', function () {
+      if (!isAdded) {
+        // Update cart count
+        cartItems++;
+        cartCount.textContent = cartItems;
+
+        // Update button state
+        addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Added to Cart';
+        addToCartBtn.classList.add('added');
+        isAdded = true;
+
+        // Show notification
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+
+        // You would typically send an AJAX request to your server here
+        // to actually add the item to the cart in your database
+      } else {
+        // Optional: Remove from cart functionality
+        cartItems--;
+        cartCount.textContent = cartItems;
+        addToCartBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+        addToCartBtn.classList.remove('added');
+        isAdded = false;
+      }
+    });
+
+    // Bonus: Persist cart count on page refresh using localStorage
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedCart = localStorage.getItem('cartItems');
+      if (savedCart) {
+        cartItems = parseInt(savedCart);
+        cartCount.textContent = cartItems;
+      }
+    });
+
+    // Update localStorage when cart changes
+    function updateCart() {
+      localStorage.setItem('cartItems', cartItems);
+    }
+  </script>
+</body>
+
+</html>
