@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Manual</title>
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+  
+    .dropdown-btn {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      z-index: 1;
+    }
+  
+    .dropdown-content a {
+      display: block;
+      padding: 10px 16px;
+      color: black;
+      text-decoration: none;
+    }
+  
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="dropdown">
+    <button class="dropdown-btn" id="menuButton">Menu</button>
+    <div class="dropdown-content" id="menuContent">
+      <a href="#">Beranda</a>
+      <a href="#">Tentang</a>
+      <a href="#">Kontak</a>
+    </div>
+  </div>
+  
+  <script>
+    // Ambil elemen tombol dan konten
+    let button = document.getElementById("menuButton");
+    let content = document.getElementById("menuContent");
+
+    // Tambahkan event listener manual tanpa membuat fungsi
+    button.addEventListener("click", function () {
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+
+    // Tutup dropdown jika klik di luar (tanpa fungsi juga)
+    window.addEventListener("click", function (e) {
+      if (!e.target.matches('#menuButton')) {
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
