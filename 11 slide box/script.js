@@ -39,3 +39,16 @@ setInterval(function () {
   }
   showCard(currentIndex);
 }, 10000);
+
+const tema = document.getElementById('tema')
+tema.addEventListener('click', function (event) {
+  event.preventDefault()
+  document.body.classList.toggle('gelap');
+})
+
+const input = document.getElementById('inputField');
+const hasil = document.getElementById('result');
+input.addEventListener('keydown', function (event) {
+  let ini = event.key;
+  hasil.textContent = ini;
+})

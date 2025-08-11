@@ -25,3 +25,7 @@
 .card.active {
   display: block;
 }
+
+.gelap{
+  background-color: slategray;
+}
